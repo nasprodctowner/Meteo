@@ -9,7 +9,7 @@ public class Producteur {
 
     public static void main(String[] args) {
     ConnectionFactory connectionFactory=null;
-    Queue queue=null;
+    Topic topic=null;
     
         Connection connection = null;
         Session session = null;
@@ -19,8 +19,8 @@ public class Producteur {
 
         try {
 				InitialContext ctx = new InitialContext();		
-				connectionFactory = (ConnectionFactory) ctx.lookup("UneConnectionFactoryMete");
-				queue = (Queue) ctx.lookup("uneBALMeteo");
+				connectionFactory = (ConnectionFactory) ctx.lookup("UneConnectionFactoryMeteo");
+				topic = (Topic) ctx.lookup("uneBALMeteo");
 			}
 		catch (Exception ex) {
 				System.err.println("erreur dans le lookup");
@@ -31,35 +31,35 @@ public class Producteur {
         try {
 				connection = connectionFactory.createConnection();
 				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-				messageProducer = session.createProducer(queue);
+				messageProducer = session.createProducer(topic);
 				message = session.createTextMessage();
 
 			int reponse = 'O';
 
 				while(reponse != 0) {
-					System.out.println("Quel message ? 1 2 3 4 et 0 pour quitter");
+					System.out.println("Quelle est la météo d'aujourd'hui ? 1 2 3 4 et 0 pour quitter");
 
 					reponse = scanner.nextInt();
 					scanner.nextLine();
 
 					switch (reponse){
 						case 1 :
-							message.setText("erreur au lancement du serveur JavaEE");
-							System.out.println("Sending log: " + message.getText());
+							message.setText("Jeudi 21/2 – 7h – météo brumeuse, des nuages");
+							System.out.println("Envoi Meteo: " + message.getText());
 							messageProducer.send(message);
 							break;
 						case 2 :
-							message.setText("erreur lors du déploiement d'un EJB");
+							message.setText("Jeudi 21/2 – 10h15 – confirmation d’une météo morose");
 							System.out.println("Sending log: " + message.getText());
 							messageProducer.send(message);
 							break;
 						case 3 :
-							message.setText("erreur lors de la recherche d'un nom dans JNDI");
+							message.setText("Jeudi 21/2 – 12h40 – un début d’éclaircie, le voile matinal se lève");
 							System.out.println("Sending log: " + message.getText());
 							messageProducer.send(message);
 							break;
 						case 4 :
-							message.setText("erreur à l'arrêt du serveur JavaEE");
+							message.setText("Jeudi 21/2 – 13h05 – le soleil apparaît enfin !");
 							System.out.println("Sending log: " + message.getText());
 							messageProducer.send(message);
 							break;
