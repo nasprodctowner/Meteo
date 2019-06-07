@@ -8,14 +8,12 @@ import java.util.Scanner;
 public class Producteur {
 
     public static void main(String[] args) {
-    ConnectionFactory connectionFactory=null;
-    Topic topic=null;
-    
+		ConnectionFactory connectionFactory=null;
+		Topic topic=null;
         Connection connection = null;
         Session session = null;
         MessageProducer messageProducer = null;
-        TextMessage message = null;        
-        final int NUM_MSGS = 3;
+        TextMessage message = null;
 
         try {
 				InitialContext ctx = new InitialContext();		
@@ -65,6 +63,8 @@ public class Producteur {
 							break;
 					}
 				}
+			connection.close();
+			System.exit(0);
 			}
 
 			catch (JMSException e) {
