@@ -3,7 +3,7 @@ package meteo;
 import javax.ejb.*;
 import javax.jms.*;
 
-@MessageDriven(mappedName = "uneBALOT")
+@MessageDriven(mappedName = "uneBALMeteo")
 public class MaisonBean implements MessageListener {
 
     public MaisonBean() {

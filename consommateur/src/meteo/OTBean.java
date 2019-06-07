@@ -21,7 +21,7 @@ public class OTBean implements MessageListener {
 
     @Resource(mappedName="UneConnectionFactoryMeteoOT")
     private ConnectionFactory connectionFactory;
-    @Resource(mappedName="uneBALOT")
+    @Resource(mappedName="uneBALMeteo")
     private Queue queue = null;
 
     private Session session = null;
